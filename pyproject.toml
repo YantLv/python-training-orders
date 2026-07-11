@@ -1,0 +1,44 @@
+[project]
+name = "orders-service"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "yant-tzeen.lay",email = "yant-tzeen.lay@axity.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "isort (>=8.0.1,<9.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "orders_service", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "black (>=26.5.1,<27.0.0)",
+    "ruff (>=0.15.21,<0.16.0)",
+    "pre-commit (>=4.6.0,<5.0.0)"
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+src_paths = ["src", "tests", "labs"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+src = ["src", "tests", "labs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "UP"]
+ignore = ["E501"]

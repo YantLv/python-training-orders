@@ -1,0 +1,40 @@
+E401 [*] Multiple imports on one line
+ --> labs\01_environment\pep8_demo.py:1:1
+  |
+1 | import os, sys
+  | ^^^^^^^^^^^^^^
+2 | from pathlib import Path
+  |
+help: Split imports
+
+F401 [*] `os` imported but unused
+ --> labs\01_environment\pep8_demo.py:1:8
+  |
+1 | import os, sys
+  |        ^^
+2 | from pathlib import Path
+  |
+help: Remove unused import
+
+F401 [*] `sys` imported but unused
+ --> labs\01_environment\pep8_demo.py:1:12
+  |
+1 | import os, sys
+  |            ^^^
+2 | from pathlib import Path
+  |
+help: Remove unused import
+
+F401 [*] `pathlib.Path` imported but unused
+ --> labs\01_environment\pep8_demo.py:2:21
+  |
+1 | import os, sys
+2 | from pathlib import Path
+  |                     ^^^^
+3 |
+4 | def calculate_total(prices:list[float])->float:
+  |
+help: Remove unused import: `pathlib.Path`
+
+Found 4 errors.
+[*] 4 fixable with the `--fix` option.

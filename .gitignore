@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Entornos virtuales
+.venv/
+venv/
+
+# Cache de herramienas
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Cobertura
+.coverage
+htmlcov/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Variables y secretos del entorno
+.env
+.env.*
+!.env.example
+
+# Bases de datos
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema Operativo
+.DS_Store
+Thumbs.db
+
+# Configuración Local de Poetry
+poetry.toml
+
+# Material interno de la compañia
+company_material/
