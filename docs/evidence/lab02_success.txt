@@ -1,0 +1,11 @@
+Escribe el nombre del archivo JSON [orders.json]: 
+Órdenes filtradas:
+ORD-1001 | Ana | completada | $850.00 | código válido
+ORD-1003 | Carla | completada | $1250.50 | código válido
+ORD-1007 | Diego | completada | $2100.00 | código válido
+ORD-1008 | Laura | completada | $700.00 | código válido
+
+Resumen:
+Número de órdenes: 4
+Monto total: $4900.50
+Monto promedio: $1225.12

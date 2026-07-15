@@ -1,5 +1,5 @@
 def calculate_total(prices: list[float]) -> float:
-    """Calculate the sum of a collection of prices."""
+    """Calcula la suma de una lista de precios."""
     return sum(prices)
 
 

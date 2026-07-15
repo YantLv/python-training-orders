@@ -1,0 +1,8 @@
+[
+    {
+        "order_code": "ORD-1001",
+        "customer": "Ana",
+        "status": "completed",
+        "total": 850.0
+    },
+]

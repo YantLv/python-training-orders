@@ -1,0 +1,50 @@
+[
+    {
+        "order_code": "ORD-1001",
+        "customer": "Ana",
+        "status": "completed",
+        "total": 850.0
+    },
+    {
+        "order_code": "ORD-1002",
+        "customer": "Luis",
+        "status": "pending",
+        "total": 320.0
+    },
+    {
+        "order_code": "ORD-1003",
+        "customer": "Carla",
+        "status": "completed",
+        "total": 1250.5
+    },
+    {
+        "order_code": "ORD-1004",
+        "customer": "Marco",
+        "status": "cancelled",
+        "total": 450.0
+    },
+    {
+        "order_code": "ORD-1005",
+        "customer": "Ana",
+        "status": "completed",
+        "total": 499.99
+    },
+    {
+        "order_code": "ORD-1006",
+        "customer": "Sofía",
+        "status": "pending",
+        "total": 980.0
+    },
+    {
+        "order_code": "ORD-1007",
+        "customer": "Diego",
+        "status": "completed",
+        "total": 2100.0
+    },
+    {
+        "order_code": "ORD-1008",
+        "customer": "Laura",
+        "status": "completed",
+        "total": 700.0
+    }
+]
