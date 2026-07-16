@@ -53,6 +53,7 @@ poetry run python labs\01_environment\pep8_demo.py
 
 Las herramientas de calidad finalizaron sin errores y el scrito se ejecutó correctamente.
 
+---
 
 ## Laboratorio 02 - Fundamentos del lenguaje
 
@@ -100,3 +101,92 @@ poetry run python labs\02_fundamentals\main.py
 ### Resultado obtenido
 
 El programa leyó correctamente el archivo JSON, filtró las órdenes completadas con monto mínimo de 500, calculó el total y el promedio, y controló correctamente los errores de archivo inexistente y JSON inválido.
+
+---
+
+## Laboratorio 03 — Funciones y programación pythonic
+
+### Estado
+
+Completado.
+
+### Objetivo
+
+Implementar funciones reutilizables mediante características propias de
+Python, incluyendo un decorador de reintentos, un generador por lotes y un
+context manager de temporización.
+
+### Conceptos aplicados
+
+- Funciones.
+- Argumentos posicionales y nombrados.
+- Argumentos variables con `*args`.
+- Argumentos variables con `**kwargs`.
+- Comprensiones de listas.
+- Funciones lambda.
+- Closures.
+- Decoradores.
+- Iteradores y generadores.
+- Uso de `yield`.
+- Context managers.
+- Manejo de excepciones.
+- Espera progresiva o backoff.
+
+### Ejercicios realizados
+
+#### Decorador de reintentos
+
+Se creó el decorador `retry()`, que vuelve a ejecutar una función cuando se
+produce un `ValueError`.
+
+La espera entre intentos aumenta progresivamente.
+
+#### Generador por lotes
+
+Se creó la función `generate_batches()`, que utiliza `yield` para entregar una
+colección dividida en lotes.
+
+#### Context manager de temporización
+
+Se creó `execution_timer()`, que mide el tiempo empleado por un bloque
+ejecutado mediante `with`.
+
+### Archivos principales
+
+- `labs/03_pythonic_functions/main.py`
+- `labs/03_pythonic_functions/README.md`
+
+### Evidencia
+
+- `docs/evidence/lab03_execution.txt`
+
+### Comandos de ejecución
+
+```cmd
+poetry run python labs\03_pythonic_functions\main.py
+```
+
+### Comandos de validación
+
+```cmd
+poetry run ruff check .
+poetry run isort --check-only .
+poetry run black --check .
+poetry run pre-commit run --all-files
+```
+
+### Resultado obtenido
+
+El programa:
+
+- Calculó un promedio utilizando `*args`.
+- Mostró datos recibidos mediante `**kwargs`.
+- Generó cuadrados de números pares mediante una comprensión.
+- Ordenó órdenes mediante una función lambda.
+- Dividió una lista de códigos de orden en tres lotes.
+- Midió el tiempo utilizado para procesar los lotes.
+- Simuló dos fallos y completó correctamente la operación en el tercer
+  intento mediante el decorador de reintentos.
+
+Las verificaciones de Ruff, isort, Black y pre-commit finalizaron
+correctamente.

@@ -1,0 +1,27 @@
+1. Ejemplo de *args
+Promedio: 25.00
+
+2. Ejemplo de **kwarg
+customer: Ana
+status: completed
+total: 850
+
+3. Conpresión de lista
+Cuadrados de números pares: [4, 16, 36]
+
+4. Función lambda
+Órdenes ordenadas por total:
+ORD-1003: $1250
+ORD-1001: $850
+ORD-1002: $320
+
+5. Generador por lotes
+Lote 1: ['ORD-1001', 'ORD-1002', 'ORD-1003']
+Lote 2: ['ORD-1004', 'ORD-1005', 'ORD-1006']
+Lote 3: ['ORD-1007']
+La operación 'Procesamiento por lotes 'tardó 0.6016 segundos.
+
+6. Decorador de reintentos
+Intento 1 fallido: No fue posible procesar ORD-1001. Nuevo intento en 0.5 segundos.
+Intento 2 fallido: No fue posible procesar ORD-1001. Nuevo intento en 1.0 segundos.
+La orden ORD-1001 fue procesada correctamente.
