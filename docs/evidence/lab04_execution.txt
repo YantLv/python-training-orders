@@ -1,0 +1,21 @@
+Primera orden:
+{'order_code': 'ORD-2001', 'customer': 'Ana', 'status': 'completed', 'subtotal': 1200.0, 'discount': 0.1, 'total': 1080.0}
+
+Segunda orden:
+{'order_code': 'ORD-2002', 'customer': 'Luis', 'status': 'pending', 'subtotal': 2400.0, 'discount': 0.05, 'total': 2280.0}
+
+Comparación:
+¿La primera orden cuesta menos que la segunda? True
+
+Validación de datos incorrectos:
+Pydantic rechazó correctamente los datos:
+3 validation errors for OrderIn
+order_code
+  String should match pattern '^ORD-\d{4}$' [type=string_pattern_mismatch, input_value='2003', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_pattern_mismatch
+items.0.quantity
+  Input should be greater than 0 [type=greater_than, input_value=0, input_type=int]
+    For further information visit https://errors.pydantic.dev/2.13/v/greater_than
+discount
+  Input should be less than or equal to 1 [type=less_than_equal, input_value=1.5, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.13/v/less_than_equal
