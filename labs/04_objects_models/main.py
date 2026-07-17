@@ -1,6 +1,9 @@
 from dataclasses import dataclass
+from typing import Literal
 
 from pydantic import BaseModel, Field, ValidationError
+
+OrderStatus = Literal["pending", "completed", "cancelled"]
 
 
 @dataclass
@@ -12,7 +15,7 @@ class OrderItem:
     unit_price: float
 
     @property
-    def subtotal(self):
+    def subtotal(self) -> float:
         """Calcula el subtotal del artículo."""
 
         return round(self.quantity * self.unit_price, 2)
@@ -26,9 +29,9 @@ class Order:
     customer: str
     items: list[OrderItem]
     discount: float = 0.0
-    status: str = "pending"
+    status: OrderStatus = "pending"
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Valida los datos básicos después de crear la orden."""
 
         if len(self.items) == 0:
@@ -38,10 +41,10 @@ class Order:
             raise ValueError("El descuento debe estar entre 0 y 1.")
 
     @property
-    def subtotal(self):
+    def subtotal(self) -> float:
         """Calcula la suma de los artículos antes del descuento."""
 
-        total = 0
+        total: float = 0.0
 
         for item in self.items:
             total += item.subtotal
@@ -49,13 +52,13 @@ class Order:
         return round(total, 2)
 
     @property
-    def total(self):
+    def total(self) -> float:
         """Calcula el total después de aplicar el descuento."""
 
         discounted_total = self.subtotal * (1 - self.discount)
         return round(discounted_total, 2)
 
-    def __lt__(self, other):
+    def __lt__(self, other: object) -> bool:
         """Compara dos órdenes utilizando su total."""
 
         if not isinstance(other, Order):
@@ -79,7 +82,7 @@ class OrderIn(BaseModel):
     customer: str = Field(min_length=1)
     items: list[OrderItemIn] = Field(min_length=1)
     discount: float = Field(default=0.0, ge=0, le=1)
-    status: str = "pending"
+    status: OrderStatus = "pending"
 
 
 class OrderOut(BaseModel):
@@ -87,16 +90,16 @@ class OrderOut(BaseModel):
 
     order_code: str
     customer: str
-    status: str
+    status: OrderStatus
     subtotal: float
     discount: float
     total: float
 
 
-def convert_to_entity(order_input):
+def convert_to_entity(order_input: OrderIn) -> Order:
     """Convierte un modelo de entrada en una entidad Order."""
 
-    items = []
+    items: list[OrderItem] = []
 
     for item_input in order_input.items:
         item = OrderItem(
@@ -116,7 +119,7 @@ def convert_to_entity(order_input):
     )
 
 
-def convert_to_output(order):
+def convert_to_output(order: Order) -> OrderOut:
     """Convierte una entidad Order en un modelo de salida."""
 
     return OrderOut(
@@ -129,7 +132,7 @@ def convert_to_output(order):
     )
 
 
-def main():
+def main() -> None:
     """Ejecuta las demostraciones del laboratorio."""
 
     first_data = {
@@ -165,8 +168,8 @@ def main():
     }
 
     try:
-        first_input = OrderIn(**first_data)
-        second_input = OrderIn(**second_data)
+        first_input = OrderIn.model_validate(first_data)
+        second_input = OrderIn.model_validate(second_data)
 
         first_order = convert_to_entity(first_input)
         second_order = convert_to_entity(second_input)
@@ -209,7 +212,7 @@ def main():
     }
 
     try:
-        OrderIn(**invalid_data)
+        OrderIn.model_validate(invalid_data)
 
     except ValidationError as error:
         print("Pydantic rechazó correctamente los datos:")
