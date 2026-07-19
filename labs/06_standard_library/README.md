@@ -21,12 +21,12 @@ El laboratorio implementa un flujo que:
 
 ```mermaid
 flowchart TB
-A[config.yaml] -> B[orders.csv]
-B -> C[lectura y conversión]
-C -> D[filtrado de órdenes]
-D -> E[cálculo de métricas]
-E -> F[summary.json]
-F -> G[mensajes de logging]
+A[config.yaml] --> B[orders.csv]
+B --> C[lectura y conversión]
+C --> D[filtrado de órdenes]
+D --> E[cálculo de métricas]
+E --> F[summary.json]
+F --> G[mensajes de logging]
 ```
 
 ## Estructura
