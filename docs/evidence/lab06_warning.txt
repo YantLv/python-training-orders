@@ -1,0 +1,11 @@
+2026-07-18 21:48:13,065 | INFO | Inicio del procesamiento.
+2026-07-18 21:48:13,081 | INFO | Se cargaron 6 órdenes desde el CSV.
+2026-07-18 21:48:13,081 | WARNING | Ninguna orden cumplió los filtros establecidos.
+2026-07-18 21:48:13,134 | INFO | El reporte fue guardado en C:\Users\aaaa.aaaaa\Documents\Curso-Python\python-training-orders\labs\06_standard_library\output\summary.json.
+2026-07-18 21:48:13,134 | INFO | Procesamiento finalizado correctamente.
+
+Procesamiento completado.
+Órdenes procesadas: 0
+Monto total: $0.00
+Monto promedio: $0.00
+Reporte generado: C:\Users\aaaa.aaaaa\Documents\Curso-Python\python-training-orders\labs\06_standard_library\output\summary.json

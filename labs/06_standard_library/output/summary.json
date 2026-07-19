@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-07-18T22:07:50.288061-06:00",
+  "python_version": "Python 3.12.13",
+  "filters": {
+    "status": "completed",
+    "minimum_total": 500
+  },
+  "metrics": {
+    "order_count": 3,
+    "total_amount": 4200.5,
+    "average_amount": 1400.17
+  },
+  "orders": [
+    {
+      "order_code": "ORD-3001",
+      "customer": "Ana",
+      "status": "completed",
+      "total": 850.0,
+      "created_at": "2026-07-01T10:30:00"
+    },
+    {
+      "order_code": "ORD-3003",
+      "customer": "Carla",
+      "status": "completed",
+      "total": 1250.5,
+      "created_at": "2026-07-03T09:20:00"
+    },
+    {
+      "order_code": "ORD-3005",
+      "customer": "Sofia",
+      "status": "completed",
+      "total": 2100.0,
+      "created_at": "2026-07-04T14:10:00"
+    }
+  ]
+}

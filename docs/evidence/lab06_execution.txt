@@ -1,0 +1,11 @@
+2026-07-18 21:47:29,624 | INFO | Inicio del procesamiento.
+2026-07-18 21:47:29,624 | INFO | Se cargaron 6 órdenes desde el CSV.
+2026-07-18 21:47:29,624 | INFO | 3 órdenes cumplieron los filtros.
+2026-07-18 21:47:29,703 | INFO | El reporte fue guardado en C:\Users\aaaa.aaaaa\Documents\Curso-Python\python-training-orders\labs\06_standard_library\output\summary.json.
+2026-07-18 21:47:29,703 | INFO | Procesamiento finalizado correctamente.
+
+Procesamiento completado.
+Órdenes procesadas: 3
+Monto total: $4200.50
+Monto promedio: $1400.17
+Reporte generado: C:\Users\aaaa.aaaaa\Documents\Curso-Python\python-training-orders\labs\06_standard_library\output\summary.json

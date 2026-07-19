@@ -193,6 +193,91 @@ correctamente.
 
 ---
 
+## Laboratorio 04 — Objetos y modelos de datos
+
+### Estado
+
+Completado.
+
+### Objetivo
+
+Modelar órdenes mediante dataclasses, aplicar cálculos derivados, comparar
+objetos y validar entradas y salidas mediante Pydantic.
+
+### Conceptos aplicados
+
+- Clases y objetos.
+- Dataclasses.
+- Composición.
+- Propiedades calculadas.
+- Métodos especiales o dunder.
+- Validación con Pydantic.
+- Serialización mediante `model_dump()`.
+- Conversión entre modelos y entidades.
+- Manejo de errores de validación.
+
+### Entidades implementadas
+
+- `OrderItem`
+- `Order`
+
+### Modelos Pydantic implementados
+
+- `OrderItemIn`
+- `OrderIn`
+- `OrderOut`
+
+### Cálculos realizados
+
+- Subtotal por artículo.
+- Subtotal de la orden.
+- Total después de aplicar el descuento.
+- Comparación entre órdenes según su total.
+
+### Validaciones realizadas
+
+- Formato del código de orden.
+- Nombre de cliente obligatorio.
+- Lista de artículos no vacía.
+- Cantidad mayor que cero.
+- Precio no negativo.
+- Descuento entre 0 y 1.
+
+### Archivos principales
+
+- `labs/04_objects_models/main.py`
+- `labs/04_objects_models/README.md`
+
+### Evidencia
+
+- `docs/evidence/lab04_execution.txt`
+
+### Comando de ejecución
+
+```cmd
+poetry run python labs\04_objects_models\main.py
+```
+
+### Comandos de validación
+
+```cmd
+poetry run ruff check .
+poetry run isort --check-only .
+poetry run black --check .
+poetry run pre-commit run --all-files
+```
+
+### Resultado obtenido
+
+Se crearon dos órdenes válidas, se calcularon sus subtotales y totales, y se
+compararon mediante el operador `<`.
+
+Los datos inválidos fueron rechazados correctamente por Pydantic debido al
+formato incorrecto del código, una cantidad igual a cero y un descuento fuera
+del rango permitido.
+
+---
+
 ## Laboratorio 05 — Tipado estático opcional y calidad
 
 ### Estado
@@ -290,3 +375,179 @@ Success: no issues found in 1 source file
 ```
 
 Ruff, isort, Black, mypy y pre-commit finalizaron correctamente.
+
+---
+
+## Laboratorio 06 — Librería estándar y entrada/salida
+
+### Estado
+
+Completado.
+
+### Objetivo
+
+Construir un proceso de entrada y salida utilizando herramientas de la
+librería estándar de Python para leer un archivo CSV, calcular métricas y
+guardar un reporte en JSON.
+
+También se utilizaron configuración YAML, fechas con zona horaria, logging y
+subprocess.
+
+### Flujo implementado
+
+```mermaid
+flowchart TB
+
+A[Configuración YAML] -> B[Lectura de órdenes CSV]
+B -> C[Conversión de valores]
+C -> D[Filtrado de órdenes]
+D -> E[Cálculo de métricas]
+E -> F[Generación de reporte JSON]
+F -> G[Registro del procesamiento]
+```
+
+### Conceptos aplicados
+
+- Manejo de rutas mediante `pathlib`.
+- Lectura de archivos CSV.
+- Lectura de configuración YAML.
+- Escritura de archivos JSON.
+- Conversión de texto a valores numéricos.
+- Fechas y horas mediante `datetime`.
+- Zonas horarias mediante `zoneinfo`.
+- Formato de fecha ISO 8601.
+- Logging en consola y archivo.
+- Niveles `INFO`, `WARNING` y `ERROR`.
+- Ejecución de procesos mediante `subprocess`.
+- Uso de `sys.executable`.
+- Manejo de excepciones.
+- Creación automática de directorios.
+
+### Archivos de entrada
+
+- `labs/06_standard_library/data/orders.csv`
+- `labs/06_standard_library/config.yaml`
+
+### Archivos generados
+
+- `labs/06_standard_library/output/summary.json`
+- `labs/06_standard_library/logs/laboratory.log`
+
+### Archivo principal
+
+- `labs/06_standard_library/main.py`
+
+### Funciones implementadas
+
+- `configure_logging()`
+- `load_config()`
+- `load_orders()`
+- `filter_orders()`
+- `calculate_metrics()`
+- `get_report_datetime()`
+- `get_python_version()`
+- `save_report()`
+- `main()`
+
+### Configuración utilizada
+
+```yaml
+minimum_total: 500
+selected_status: completed
+timezone: America/Mexico_City
+output_file: summary.json
+```
+
+### Dependencias agregadas
+
+- `PyYAML`
+- `tzdata`
+
+PyYAML se agregó para leer archivos YAML.
+
+`tzdata` se agregó porque el entorno de Windows no encontraba la base de datos
+necesaria para utilizar `America/Mexico_City` mediante `ZoneInfo`.
+
+### Problema de zona horaria
+
+Durante la primera ejecución se produjo:
+
+```text
+No time zone found with key America/Mexico_City
+```
+
+La zona horaria configurada era válida. El problema era la ausencia de datos
+IANA de zonas horarias en el entorno.
+
+Se solucionó instalando:
+
+```cmd
+poetry add tzdata
+```
+
+También se agregó manejo específico para:
+
+```python
+ZoneInfoNotFoundError
+```
+
+Este bloque se colocó antes de `KeyError`, porque `ZoneInfoNotFoundError`
+deriva de esa excepción.
+
+### Resultado obtenido
+
+Se cargaron seis órdenes desde el CSV.
+
+Tres órdenes cumplieron los filtros de estado `completed` y monto mínimo de
+500:
+
+- `ORD-3001`
+- `ORD-3003`
+- `ORD-3005`
+
+Las métricas obtenidas fueron:
+
+```text
+Cantidad de órdenes: 3
+Monto total: 4200.50
+Monto promedio: 1400.17
+```
+
+El reporte fue guardado correctamente en formato JSON.
+
+### Validación de WARNING
+
+Se modificó temporalmente el monto mínimo a 5000.
+
+Ninguna orden cumplió los filtros y el programa generó correctamente un
+mensaje con nivel `WARNING`.
+
+Después de la prueba, el monto mínimo se restauró a 500.
+
+### Evidencias
+
+- `docs/evidence/lab06_execution.txt`
+- `docs/evidence/lab06_warning.txt`
+- `docs/evidence/lab06_ruff.txt`
+
+### Comando de ejecución
+
+```cmd
+poetry run python labs\06_standard_library\main.py
+```
+
+### Comandos de validación
+
+```cmd
+poetry run ruff check .
+poetry run isort --check-only .
+poetry run black --check .
+poetry run mypy
+poetry run pre-commit run --all-files
+```
+
+### Resultado de calidad
+
+La ejecución del laboratorio terminó correctamente.
+
+Ruff, isort, Black, mypy y los hooks de pre-commit finalizaron sin errores.

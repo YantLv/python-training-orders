@@ -1,0 +1,7 @@
+order_code,customer,status,total,created_at
+ORD-3001,Ana,completed,850.00,2026-07-01T10:30:00
+ORD-3002,Luis,pending,320.00,2026-07-02T12:15:00
+ORD-3003,Carla,completed,1250.50,2026-07-03T09:20:00
+ORD-3004,Marco,cancelled,450.00,2026-07-03T16:45:00
+ORD-3005,Sofia,completed,2100.00,2026-07-04T14:10:00
+ORD-3006,Diego,completed,480.00,2026-07-05T11:00:00

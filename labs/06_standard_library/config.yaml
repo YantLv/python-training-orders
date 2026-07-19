@@ -1,0 +1,4 @@
+minimum_total : 500
+selected_status: completed
+timezone: America/Mexico_City
+output_file : summary.json
