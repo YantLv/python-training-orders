@@ -1,0 +1,16 @@
+2026-07-18 22:48:02,880 | INFO | Inicio del laboratorio de consumo HTTP.
+2026-07-18 22:48:02,961 | INFO | Consultando la API: https://httpbin.org/json
+2026-07-18 22:48:04,173 | INFO | La API respondió correctamente con código 200.
+2026-07-18 22:48:04,176 | INFO | La respuesta JSON fue guardada en C:\Users\aaaa.aaaaa\Documents\Curso-Python\python-training-orders\labs\07_http_api\output\api_response.json.
+2026-07-18 22:48:04,178 | INFO | Descargando archivo desde https://httpbin.org/image/png. Intento 1 de 3.
+2026-07-18 22:48:04,472 | INFO | Archivo descargado correctamente en C:\Users\aaaa.aaaaa\Documents\Curso-Python\python-training-orders\labs\07_http_api\output\httpbin_image.png.
+2026-07-18 22:48:04,474 | INFO | Iniciando prueba controlada de reintentos.
+2026-07-18 22:48:06,116 | WARNING | Intento 1 fallido: código HTTP 503. Nuevo intento en 0.5 segundos.
+2026-07-18 22:48:06,937 | WARNING | Intento 2 fallido: código HTTP 503. Nuevo intento en 1.0 segundos.
+2026-07-18 22:48:08,059 | INFO | La prueba terminó como se esperaba con código HTTP 502.
+2026-07-18 22:48:08,059 | INFO | Laboratorio finalizado correctamente.
+
+Procesamiento HTTP completado.
+Respuesta JSON: C:\Users\aaaa.aaaaa\Documents\Curso-Python\python-training-orders\labs\07_http_api\output\api_response.json
+Archivo descargado: C:\Users\aaaa.aaaaa\Documents\Curso-Python\python-training-orders\labs\07_http_api\output\httpbin_image.png
+Tamaño descargado: 8090 bytes

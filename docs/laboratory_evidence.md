@@ -51,7 +51,7 @@ poetry run python labs\01_environment\pep8_demo.py
 
 ### Resultado obtenido
 
-Las herramientas de calidad finalizaron sin errores y el scrito se ejecutó correctamente.
+Las herramientas de calidad finalizaron sin errores y el escrito se ejecutó correctamente.
 
 ---
 
@@ -337,7 +337,7 @@ El problema se resolvió mediante:
 OrderIn.model_validate(data)
 ```
 
-Pydantic valida el diccionario y produce un modelo con los tipos definidos.
+Pydantic válida el diccionario y produce un modelo con los tipos definidos.
 
 ### Archivos principales
 
@@ -551,3 +551,182 @@ poetry run pre-commit run --all-files
 La ejecución del laboratorio terminó correctamente.
 
 Ruff, isort, Black, mypy y los hooks de pre-commit finalizaron sin errores.
+
+---
+
+## Laboratorio 07 — HTTP y consumo de APIs
+
+### Estado
+
+Completado.
+
+### Objetivo
+
+Construir un cliente HTTP robusto mediante HTTPX que permita consultar una API,
+manejar fallos temporales y descargar un archivo mediante streaming.
+
+Este laboratorio completa el Fundamental Level.
+
+### Servicio utilizado
+
+El temario menciona Smocker, pero no se proporcionó una instancia ni una
+configuración para utilizarlo.
+
+Se utilizó httpbin como servicio público para probar:
+
+- Respuestas JSON.
+- Descargas de archivos.
+- Códigos HTTP de error controlados.
+
+### Conceptos aplicados
+
+- Clientes HTTP con HTTPX.
+- Solicitudes GET.
+- Encabezados HTTP.
+- Timeouts de conexión y operación.
+- Validación de códigos HTTP.
+- Manejo de errores `4xx` y `5xx`.
+- Reintentos de errores temporales.
+- Backoff progresivo.
+- Descarga mediante streaming.
+- Escritura binaria de archivos.
+- Archivos temporales.
+- Serialización JSON.
+- Logging.
+- Manejo de excepciones.
+- Context managers.
+- Reutilización de conexiones HTTP.
+
+### URLs de prueba
+
+```text
+https://httpbin.org/json
+https://httpbin.org/image/png
+https://httpbin.org/status/503
+```
+
+### Dependencia agregada
+
+```cmd
+poetry add httpx
+```
+
+### Funciones implementadas
+
+- `configure_logging()`
+- `is_retryable_status()`
+- `wait_before_retry()`
+- `get_with_retries()`
+- `fetch_json()`
+- `save_json()`
+- `download_streaming()`
+- `demonstrate_retries()`
+- `main()`
+
+### Timeouts configurados
+
+```text
+Timeout general: 10 segundos
+Timeout de conexión: 5 segundos
+```
+
+### Códigos reintentables
+
+```text
+429
+500
+502
+503
+504
+```
+
+### Backoff utilizado
+
+El retraso inicial fue de `0.5` segundos.
+
+Las esperas de la prueba fueron:
+
+```text
+0.5 segundos
+1.0 segundos
+```
+
+Después del tercer intento, el error HTTP 503 fue manejado como resultado
+esperado de la demostración.
+
+### Streaming
+
+La imagen se descargó mediante fragmentos de 8192 bytes.
+
+Durante la descarga se utilizó el archivo temporal:
+
+```text
+httpbin_image.png.part
+```
+
+Al completar la operación se creó:
+
+```text
+httpbin_image.png
+```
+
+### Archivos principales
+
+- `labs/07_http_api/main.py`
+- `labs/07_http_api/README.md`
+
+### Archivos generados
+
+- `labs/07_http_api/output/api_response.json`
+- `labs/07_http_api/output/httpbin_image.png`
+- `labs/07_http_api/logs/http_client.log`
+
+El archivo de logging puede quedar excluido del repositorio mediante
+`.gitignore`.
+
+### Evidencias
+
+- `docs/evidence/lab07_execution.txt`
+- `docs/evidence/lab07_ruff.txt`
+- `docs/evidence/lab07_precommit.txt`
+
+### Comando de ejecución
+
+```cmd
+poetry run python labs\07_http_api\main.py
+```
+
+### Comandos de validación
+
+```cmd
+poetry run ruff check .
+poetry run isort --check-only .
+poetry run black --check .
+poetry run mypy
+poetry run pre-commit run --all-files
+```
+
+### Resultado obtenido
+
+La consulta JSON respondió correctamente con código HTTP 200 y fue guardada en
+`api_response.json`.
+
+La imagen fue descargada mediante streaming y guardada en
+`httpbin_image.png`.
+
+La prueba de HTTP 503 realizó los reintentos configurados, aplicó la espera
+progresiva y terminó de forma controlada.
+
+Ruff, isort, Black, mypy y pre-commit finalizaron correctamente.
+
+### Nivel completado
+
+Con este laboratorio se completaron los módulos del Fundamental Level:
+
+1. Entorno y herramientas.
+2. Fundamentos del lenguaje.
+3. Funciones y programación pythonic.
+4. Objetos y modelos de datos.
+5. Tipado estático opcional y calidad.
+6. Librería estándar y entrada/salida.
+7. HTTP y consumo de APIs.
