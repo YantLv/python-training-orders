@@ -398,12 +398,12 @@ subprocess.
 ```mermaid
 flowchart TB
 
-A[Configuración YAML] -> B[Lectura de órdenes CSV]
-B -> C[Conversión de valores]
-C -> D[Filtrado de órdenes]
-D -> E[Cálculo de métricas]
-E -> F[Generación de reporte JSON]
-F -> G[Registro del procesamiento]
+A[Configuración YAML] --> B[Lectura de órdenes CSV]
+B --> C[Conversión de valores]
+C --> D[Filtrado de órdenes]
+D --> E[Cálculo de métricas]
+E --> F[Generación de reporte JSON]
+F --> G[Registro del procesamiento]
 ```
 
 ### Conceptos aplicados
