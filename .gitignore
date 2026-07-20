@@ -30,6 +30,7 @@ dist/
 *.db
 *.sqlite
 *.sqlite3
+labs/08_data_access_orm/orders.db
 
 # IDE
 .vscode/

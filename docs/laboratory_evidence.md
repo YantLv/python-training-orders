@@ -730,3 +730,213 @@ Con este laboratorio se completaron los módulos del Fundamental Level:
 5. Tipado estático opcional y calidad.
 6. Librería estándar y entrada/salida.
 7. HTTP y consumo de APIs.
+
+---
+
+## Laboratorio 08 — Acceso a datos y ORM
+
+### Estado
+
+Completado.
+
+### Nivel
+
+Intermediate Level.
+
+### Objetivo
+
+Implementar modelos relacionados mediante SQLAlchemy ORM, realizar operaciones
+CRUD, administrar el esquema mediante Alembic y comprobar el funcionamiento
+con una base SQLite en memoria.
+
+### Modelos implementados
+
+- `User`
+- `Order`
+- `OrderItem`
+
+### Relaciones
+
+```text
+User 1 ─── N Order
+Order 1 ─── N OrderItem
+```
+
+Las relaciones utilizan `relationship()`, `back_populates` y cascadas para
+administrar objetos relacionados.
+
+### Campos principales
+
+#### User
+
+- `id`
+- `name`
+- `email`
+
+#### Order
+
+- `id`
+- `status`
+- `created_at`
+- `user_id`
+
+#### OrderItem
+
+- `id`
+- `product_name`
+- `quantity`
+- `unit_price`
+- `order_id`
+
+### Cálculos implementados
+
+- Subtotal por artículo.
+- Total de la orden.
+
+Los importes se manejan mediante `Decimal` y `Numeric(10, 2)`.
+
+### Restricciones implementadas
+
+- Correos electrónicos únicos.
+- Cantidad mayor que cero.
+- Precio unitario no negativo.
+- Orden con al menos un artículo.
+- Usuario obligatorio para crear una orden.
+
+### CRUD implementado
+
+#### Create
+
+- `create_user()`
+- `create_order()`
+
+#### Read
+
+- `get_user_by_email()`
+- `get_order_by_id()`
+- `list_orders()`
+
+#### Update
+
+- `update_order_status()`
+
+#### Delete
+
+- `delete_order()`
+
+### Base de datos local
+
+La demostración utiliza:
+
+```text
+labs/08_data_access_orm/orders.db
+```
+
+Este archivo está excluido del repositorio porque se genera localmente.
+
+### Migración
+
+Alembic fue configurado para utilizar:
+
+```python
+Base.metadata
+```
+
+Se generó una migración inicial para crear:
+
+- `users`
+- `orders`
+- `order_items`
+- Llaves primarias.
+- Llaves foráneas.
+- Índices.
+- Restricciones.
+
+La migración fue aplicada mediante:
+
+```cmd
+poetry run alembic upgrade head
+```
+
+### Demostración realizada
+
+La demostración:
+
+1. Creó o recuperó un usuario.
+2. Creó una orden con dos artículos.
+3. Calculó un total de 1200.00.
+4. Consultó la orden almacenada.
+5. Actualizó el estado a `completed`.
+6. Listó las órdenes.
+7. Eliminó la orden.
+
+### Pruebas
+
+Se implementaron cuatro pruebas:
+
+- Creación y consulta de usuario.
+- Creación de orden y artículos.
+- Actualización de estado.
+- Eliminación de orden.
+
+Las pruebas utilizan SQLite en memoria y una base aislada para cada caso.
+
+Resultado:
+
+```text
+4 passed
+```
+
+### Archivos principales
+
+- `src/orders_service/data_access/database.py`
+- `src/orders_service/data_access/models.py`
+- `src/orders_service/data_access/crud.py`
+- `src/orders_service/data_access/demo.py`
+- `tests/data_access/conftest.py`
+- `tests/data_access/test_crud.py`
+- `labs/08_data_access_orm/README.md`
+- `alembic.ini`
+- `labs/08_data_access_orm/migrations/env.py`
+- Archivo generado dentro de `migrations/versions/`
+
+### Dependencias agregadas
+
+- SQLAlchemy
+- Alembic
+- Pytest
+
+### Evidencias
+
+- `docs/evidence/lab08_demo.txt`
+- `docs/evidence/lab08_pytest.txt`
+- `docs/evidence/lab08_alembic_current.txt`
+- `docs/evidence/lab08_alembic_history.txt`
+- `docs/evidence/lab08_ruff.txt`
+
+### Comandos principales
+
+```cmd
+poetry run alembic upgrade head
+poetry run python -m orders_service.data_access.demo
+poetry run pytest tests\data_access -v
+```
+
+### Validación de calidad
+
+```cmd
+poetry run ruff check .
+poetry run isort --check-only .
+poetry run black --check .
+poetry run mypy
+poetry run pytest tests\data_access -v
+poetry run pre-commit run --all-files
+```
+
+### Resultado obtenido
+
+Los modelos y relaciones fueron creados correctamente.
+
+El CRUD funcionó sobre la base SQLite local, la migración quedó registrada con
+Alembic y las cuatro pruebas terminaron correctamente utilizando SQLite en
+memoria.
